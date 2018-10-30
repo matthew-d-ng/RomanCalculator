@@ -121,7 +121,7 @@ char* to_roman(int num)
     char* newRoman = calloc( sizeof(romanNum) + 1, 1 );
     if (!newRoman)
       yyerror("Ran out of memory");
-
+    
     newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
     newRoman = strncat(newRoman, "-", 1);
     romanNum = newRoman;
@@ -132,16 +132,22 @@ char* to_roman(int num)
   // assign thousands
   if (num / 1000 > 0)
   {
+    char* buf = calloc(9000, 1);
+    
+    size_t thousand_len = 0;
     int rem;
     for ( rem = num; rem >= 1000; rem -= 1000) {
-      char* newRoman = calloc( sizeof(romanNum) + 1, 1 );
-      if (!newRoman)
-        yyerror("Ran out of memory");
-        
-      newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-      newRoman = strncat(newRoman, "M", 1);
-      romanNum = newRoman;
+      sprintf(buf++, "%s", "M");
+      thousand_len++;
     }
+    buf -= thousand_len;
+    
+    char* newRoman = calloc( sizeof(romanNum) + thousand_len, 1 );
+    newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
+    newRoman = strncpy(newRoman, buf, thousand_len);
+    romanNum = newRoman;
+    
+    free(buf);
   }
   
   // assign hundreds
