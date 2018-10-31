@@ -1,2 +1,2 @@
 # RomanCalculator
-Improvement of Roman Calculator in flex-bison-assignment repository
+Roman Calculator that takes in an expression containing roman numerals and returns the answer in roman numerals.
