@@ -5,6 +5,7 @@
 int yylex();
 void yyerror();
 char* to_roman(int num);
+size_t NUM_BUF_SIZE = 9016;
 
 char* SYM_HUNDREDS[9] = 
       { "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
@@ -20,7 +21,7 @@ char* SYM_ONES[9] =
 %token EOL
 %%
 calclist: /* nothing */
- | calclist expr EOL { printf("%s\n", to_roman($2)); }
+ | calclist expr EOL { char* result = to_roman($2); printf("%s\n", result); free(result); } // yes, I know
  ;
  
 expr: factor
@@ -94,84 +95,59 @@ thousands: THOUSAND THOUSAND THOUSAND   { $$ = 3000; }
 
 %%
 
-char* add_roman_unit(char* romanNum, char** symbols, int num)
+void add_roman_unit(char** acc_ptr, char** symbols, int num)
 {
-  char* newRoman = NULL;
+  char* buf = *acc_ptr;
   if (num != 0) {
     char* symbol = symbols[num-1];
-    newRoman = calloc( sizeof(romanNum) + strlen(symbol), 1);
-    if (newRoman) {
-        newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-        newRoman = strncat(newRoman, symbol, strlen(symbol));
-    }
-    else
-      yyerror("Ran out of memory");
+    sprintf(buf, "%s", symbol);
+    *acc_ptr += strlen(symbol);
   }
-  return newRoman;
 }
 
 char* to_roman(int num) 
 {
-  if (num == 0)
-    return "Z";   // actually should be nullus B)
+  // Ideally, a buffer should be passed INTO THIS FUNCTION, because otherwise the caller will forget to free it
+  
+  if (num > 9999999)
+    return "That number is too big, please don't do that..";
 
-  char* romanNum = "";
+  if (num == 0)
+    return "nulla";
+
+  char* romanNum = calloc(NUM_BUF_SIZE, 1);
+  if (!romanNum)
+    yyerror("No memory!");
+    
+  char* acc = romanNum;
   
   if (num < 0) {
-    char* newRoman = calloc( sizeof(romanNum) + 1, 1 );
-    if (!newRoman)
-      yyerror("Ran out of memory");
-    
-    newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-    newRoman = strncat(newRoman, "-", 1);
-    romanNum = newRoman;
+    sprintf(acc++, "%s", "-");
     num = -num;
-
   }
   
   // assign thousands
   if (num / 1000 > 0)
   {
-    char* buf = calloc(9000, 1);
-    
-    size_t thousand_len = 0;
     int rem;
     for ( rem = num; rem >= 1000; rem -= 1000) {
-      sprintf(buf++, "%s", "M");
-      thousand_len++;
+      sprintf(acc++, "%s", "M");
     }
-    buf -= thousand_len;
-    
-    char* newRoman = calloc( sizeof(romanNum) + thousand_len, 1 );
-    newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-    newRoman = strncpy(newRoman, buf, thousand_len);
-    romanNum = newRoman;
-    
-    free(buf);
   }
-  
+
   // assign hundreds
   num = num % 1000;
-  char* newRoman = add_roman_unit(romanNum, SYM_HUNDREDS, num/100);
-  if (newRoman) {
-    romanNum = newRoman;
-  }
-  newRoman = NULL;
+  add_roman_unit(&acc, SYM_HUNDREDS, num/100);
 
    // assign tens
   num = num % 100;
-  newRoman = add_roman_unit(romanNum, SYM_TENS, num/10);
-  if (newRoman) {
-    romanNum = newRoman;
-  }
-  newRoman = NULL;
+  add_roman_unit(&acc, SYM_TENS, num/10);
 
   // assign ones
   num = num % 10;
-  newRoman = add_roman_unit(romanNum, SYM_ONES, num);
-  if (newRoman) {
-    romanNum = newRoman;
-  }
+  add_roman_unit(&acc, SYM_ONES, num);
+  
+  romanNum = realloc(romanNum, strlen(romanNum)+1);
   return romanNum;
 }
 

@@ -70,6 +70,7 @@
 int yylex();
 void yyerror();
 char* to_roman(int num);
+size_t NUM_BUF_SIZE = 9016;
 
 char* SYM_HUNDREDS[9] = 
       { "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
@@ -78,7 +79,7 @@ char* SYM_TENS[9] =
 char* SYM_ONES[9] =
       { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
 
-#line 82 "romcalc.tab.c" /* yacc.c:339  */
+#line 83 "romcalc.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -146,7 +147,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 150 "romcalc.tab.c" /* yacc.c:358  */
+#line 151 "romcalc.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -445,12 +446,12 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22,    23,    26,    27,    28,    31,    32,    33,
-      36,    37,    40,    41,    42,    43,    44,    45,    46,    47,
-      48,    49,    50,    51,    52,    53,    54,    57,    58,    59,
-      60,    61,    62,    63,    64,    65,    68,    69,    70,    71,
-      72,    73,    74,    75,    76,    79,    80,    81,    82,    83,
-      84,    85,    86,    87,    90,    91,    92
+       0,    23,    23,    24,    27,    28,    29,    32,    33,    34,
+      37,    38,    41,    42,    43,    44,    45,    46,    47,    48,
+      49,    50,    51,    52,    53,    54,    55,    58,    59,    60,
+      61,    62,    63,    64,    65,    66,    69,    70,    71,    72,
+      73,    74,    75,    76,    77,    80,    81,    82,    83,    84,
+      85,    86,    87,    88,    91,    92,    93
 };
 #endif
 
@@ -1261,289 +1262,289 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 23 "romcalc.y" /* yacc.c:1646  */
-    { printf("%s\n", to_roman((yyvsp[-1]))); }
-#line 1267 "romcalc.tab.c" /* yacc.c:1646  */
+#line 24 "romcalc.y" /* yacc.c:1646  */
+    { char* result = to_roman((yyvsp[-1])); printf("%s\n", result); free(result); }
+#line 1268 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 27 "romcalc.y" /* yacc.c:1646  */
+#line 28 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) + (yyvsp[0]); }
-#line 1273 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1274 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 28 "romcalc.y" /* yacc.c:1646  */
+#line 29 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) - (yyvsp[0]); }
-#line 1279 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1280 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 32 "romcalc.y" /* yacc.c:1646  */
+#line 33 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) * (yyvsp[0]); }
-#line 1285 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1286 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 33 "romcalc.y" /* yacc.c:1646  */
+#line 34 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) / (yyvsp[0]); }
-#line 1291 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1292 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 37 "romcalc.y" /* yacc.c:1646  */
+#line 38 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]); }
-#line 1297 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1298 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 40 "romcalc.y" /* yacc.c:1646  */
+#line 41 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-3]) + (yyvsp[-2]) + (yyvsp[-1]) + (yyvsp[0]); }
-#line 1303 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1304 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 41 "romcalc.y" /* yacc.c:1646  */
+#line 42 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) + (yyvsp[-1]) + (yyvsp[0]); }
-#line 1309 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1310 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 42 "romcalc.y" /* yacc.c:1646  */
+#line 43 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) + (yyvsp[-1]) + (yyvsp[0]); }
-#line 1315 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1316 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 43 "romcalc.y" /* yacc.c:1646  */
+#line 44 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]) + (yyvsp[0]); }
-#line 1321 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1322 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 44 "romcalc.y" /* yacc.c:1646  */
+#line 45 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) + (yyvsp[-1]) + (yyvsp[0]); }
-#line 1327 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1328 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 45 "romcalc.y" /* yacc.c:1646  */
+#line 46 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]) + (yyvsp[0]); }
-#line 1333 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1334 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 46 "romcalc.y" /* yacc.c:1646  */
+#line 47 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]) + (yyvsp[0]); }
-#line 1339 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1340 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 48 "romcalc.y" /* yacc.c:1646  */
+#line 49 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-2]) + (yyvsp[-1]) + (yyvsp[0]); }
-#line 1345 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1346 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 49 "romcalc.y" /* yacc.c:1646  */
+#line 50 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]) + (yyvsp[0]); }
-#line 1351 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1352 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 50 "romcalc.y" /* yacc.c:1646  */
+#line 51 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]) + (yyvsp[0]); }
-#line 1357 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1358 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 52 "romcalc.y" /* yacc.c:1646  */
+#line 53 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]) + (yyvsp[0]); }
-#line 1363 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1364 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 57 "romcalc.y" /* yacc.c:1646  */
+#line 58 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 1; }
-#line 1369 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1370 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 58 "romcalc.y" /* yacc.c:1646  */
+#line 59 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 2; }
-#line 1375 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1376 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 59 "romcalc.y" /* yacc.c:1646  */
+#line 60 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 3; }
-#line 1381 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1382 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 60 "romcalc.y" /* yacc.c:1646  */
+#line 61 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 4; }
-#line 1387 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1388 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 61 "romcalc.y" /* yacc.c:1646  */
+#line 62 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 5; }
-#line 1393 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1394 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 62 "romcalc.y" /* yacc.c:1646  */
+#line 63 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 6; }
-#line 1399 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1400 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 63 "romcalc.y" /* yacc.c:1646  */
+#line 64 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 7; }
-#line 1405 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1406 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 64 "romcalc.y" /* yacc.c:1646  */
+#line 65 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 8; }
-#line 1411 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1412 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 65 "romcalc.y" /* yacc.c:1646  */
+#line 66 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 9; }
-#line 1417 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1418 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 68 "romcalc.y" /* yacc.c:1646  */
+#line 69 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 90; }
-#line 1423 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1424 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 69 "romcalc.y" /* yacc.c:1646  */
+#line 70 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 80; }
-#line 1429 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1430 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 70 "romcalc.y" /* yacc.c:1646  */
+#line 71 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 70; }
-#line 1435 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1436 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 71 "romcalc.y" /* yacc.c:1646  */
+#line 72 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 60; }
-#line 1441 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1442 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 72 "romcalc.y" /* yacc.c:1646  */
+#line 73 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 50; }
-#line 1447 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1448 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 73 "romcalc.y" /* yacc.c:1646  */
+#line 74 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 40; }
-#line 1453 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1454 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 74 "romcalc.y" /* yacc.c:1646  */
+#line 75 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 30; }
-#line 1459 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1460 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 75 "romcalc.y" /* yacc.c:1646  */
+#line 76 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 20; }
-#line 1465 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1466 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 76 "romcalc.y" /* yacc.c:1646  */
+#line 77 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 10; }
-#line 1471 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1472 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 79 "romcalc.y" /* yacc.c:1646  */
+#line 80 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 900; }
-#line 1477 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1478 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 80 "romcalc.y" /* yacc.c:1646  */
+#line 81 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 800; }
-#line 1483 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1484 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 81 "romcalc.y" /* yacc.c:1646  */
+#line 82 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 700; }
-#line 1489 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1490 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 82 "romcalc.y" /* yacc.c:1646  */
+#line 83 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 600; }
-#line 1495 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1496 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 83 "romcalc.y" /* yacc.c:1646  */
+#line 84 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 500; }
-#line 1501 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1502 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 84 "romcalc.y" /* yacc.c:1646  */
+#line 85 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 400; }
-#line 1507 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1508 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 85 "romcalc.y" /* yacc.c:1646  */
+#line 86 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 300; }
-#line 1513 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1514 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 86 "romcalc.y" /* yacc.c:1646  */
+#line 87 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 200; }
-#line 1519 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1520 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 87 "romcalc.y" /* yacc.c:1646  */
+#line 88 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 100; }
-#line 1525 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1526 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 90 "romcalc.y" /* yacc.c:1646  */
+#line 91 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 3000; }
-#line 1531 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1532 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 91 "romcalc.y" /* yacc.c:1646  */
+#line 92 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 2000; }
-#line 1537 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1538 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 92 "romcalc.y" /* yacc.c:1646  */
+#line 93 "romcalc.y" /* yacc.c:1646  */
     { (yyval) = 1000; }
-#line 1543 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1544 "romcalc.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1547 "romcalc.tab.c" /* yacc.c:1646  */
+#line 1548 "romcalc.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1771,84 +1772,62 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 95 "romcalc.y" /* yacc.c:1906  */
+#line 96 "romcalc.y" /* yacc.c:1906  */
 
 
-char* add_roman_unit(char* romanNum, char** symbols, int num)
+void add_roman_unit(char** acc_ptr, char** symbols, int num)
 {
-  char* newRoman = NULL;
+  char* buf = *acc_ptr;
   if (num != 0) {
     char* symbol = symbols[num-1];
-    newRoman = calloc( sizeof(romanNum) + strlen(symbol), 1);
-    if (newRoman) {
-        newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-        newRoman = strncat(newRoman, symbol, strlen(symbol));
-    }
-    else
-      yyerror("Ran out of memory");
+    sprintf(buf, "%s", symbol);
+    *acc_ptr += strlen(symbol);
   }
-  return newRoman;
 }
 
 char* to_roman(int num) 
 {
-  if (num == 0)
-    return "Z";   // actually should be nullus B)
+  // Ideally, a buffer should be passed INTO THIS FUNCTION, because otherwise the caller will forget to free it
+  
+  if (num > 9999999)
+    return "That number is too big, please don't do that..";
 
-  char* romanNum = "";
+  if (num == 0)
+    return "nulla";
+
+  char* romanNum = calloc(NUM_BUF_SIZE, 1);
+  if (!romanNum)
+    yyerror("No memory!");
+    
+  char* acc = romanNum;
   
   if (num < 0) {
-    char* newRoman = calloc( sizeof(romanNum) + 1, 1 );
-    if (!newRoman)
-      yyerror("Ran out of memory");
-    
-    newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-    newRoman = strncat(newRoman, "-", 1);
-    romanNum = newRoman;
+    sprintf(acc++, "%s", "-");
     num = -num;
-
   }
   
   // assign thousands
   if (num / 1000 > 0)
   {
-    char* buf = calloc(9000, 1);
-    size_t thousand_len = 0;
     int rem;
     for ( rem = num; rem >= 1000; rem -= 1000) {
-      sprintf(buf++, "%s", "M");
-      thousand_len++;
+      sprintf(acc++, "%s", "M");
     }
-    buf -= thousand_len;
-    char* newRoman = calloc( sizeof(romanNum) + thousand_len, 1 );
-    newRoman = strncpy(newRoman, romanNum, strlen(romanNum));
-    newRoman = strncpy(newRoman, buf, thousand_len);
-    romanNum = newRoman;
-    free(buf);
   }
-  
+
   // assign hundreds
   num = num % 1000;
-  char* newRoman = add_roman_unit(romanNum, SYM_HUNDREDS, num/100);
-  if (newRoman) {
-    romanNum = newRoman;
-  }
-  newRoman = NULL;
+  add_roman_unit(&acc, SYM_HUNDREDS, num/100);
 
    // assign tens
   num = num % 100;
-  newRoman = add_roman_unit(romanNum, SYM_TENS, num/10);
-  if (newRoman) {
-    romanNum = newRoman;
-  }
-  newRoman = NULL;
+  add_roman_unit(&acc, SYM_TENS, num/10);
 
   // assign ones
   num = num % 10;
-  newRoman = add_roman_unit(romanNum, SYM_ONES, num);
-  if (newRoman) {
-    romanNum = newRoman;
-  }
+  add_roman_unit(&acc, SYM_ONES, num);
+  
+  romanNum = realloc(romanNum, strlen(romanNum)+1);
   return romanNum;
 }
 
